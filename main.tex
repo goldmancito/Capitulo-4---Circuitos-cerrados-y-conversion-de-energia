@@ -1,0 +1,619 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+%%Para esconder subsecciones en el índice:
+%\setcounter{tocdepth}{1}
+
+
+%Microtype
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+% activate={true,nocompatibility} - activate protrusion and expansion
+% final - enable microtype; use "draft" to disable
+% tracking=true, kerning=true, spacing=true - activate these techniques
+% factor=1100 - add 10% to the protrusion amount (default is 1000)
+% stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)
+\microtypecontext{spacing=nonfrench}
+  \usepackage{pgfplots}
+  \pgfplotsset{compat=newest}
+  %% the following commands are needed for some matlab2tikz features
+  \usetikzlibrary{plotmarks}
+  \usetikzlibrary{arrows.meta}
+  \usepgfplotslibrary{patchplots}
+  \usepackage{grffile}
+  %% Language and font encodings
+\usepackage[english, spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=2.7cm,right=2.7cm,marginparwidth=1.75cm]{geometry}
+%Para los gráficos
+\definecolor{mycolor1}{rgb}{0.00000,0.44706,0.74118}%
+\definecolor{mycolor2}{RGB}{255,165,0}%
+\definecolor{rojo}{RGB}{255,0,0}%
+\definecolor{verde}{RGB}{50,205,90}%
+\definecolor{azulfrancia}{rgb}{0.00000,0.44706,0.74118}%
+\definecolor{boston}{rgb}{0.8, 0.0, 0.0}
+\usepackage{float}
+
+%Tabla
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{pifont}
+\usepackage{tabularx}
+
+%% Useful packages
+\usepackage{parskip}
+\usepackage{pdflscape}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[makeroom]{cancel}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{circuitikz}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+
+  %% you may also want the following commands
+  %\pgfplotsset{plot coordinates/math parser=false}
+  %\newlength\figureheight
+  %\newlength\figurewidth
+\usepackage{verbatim}
+\usepackage[nodisplayskipstretch]{setspace}
+\setstretch{1.2}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{chemfig}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{multirow}
+\title{Capitulo 4 - Circuitos cerrados y conversión de energía}
+\author{Nicolás Goldman}
+\date{March 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Como se explicó en el capítulo anterior, los Circuitos Intermedios y Circuitos Cerrados se utilizan a escala laboratorio y planta piloto para una gama muy amplia de operaciones, por ejemplo proporcionar la sección de prueba y ...
+A escala industrial se emplean en el ......... (en reactores nucleares), de refrigreración ..... (en forma de anillo), etc.
+
+Mientras que los ciclos térmicos son muestra de estudio en esta escala tienen para explicar la conversión de formas de energía en trabajo útil, hay muy poco escrito sobre los Circuitos Intermedios que no obstante pueden ser de gran potencia. un caso notable que ... y que .... el caso de los "heat pipes" que respondera al caso II a replicar más abajo.
+
+La pregunta a responder, dado que en la escala industrial los Circuitos Intermedios suponen grandes cantidades de capital y espacio y, oportunamente .... de calor, solo en el mejor caso .... calor, lo cual es el trabajo que pierde? El ....
+Para ello se ... para los siguientes modelos:
+\begin{itemize}
+    \item Caso 0: Los $\Delta$T en la fuente caliente/fría ...
+    \item Caso 1: Con $\Delta$T pero fluidos ¿poliméricos? (heat pipe), no hay pérdidas de calor?
+    \item Caso 2: Calor sensible en el Circuito Intermedio con $\Delta$T variable, .... y pérdida de calor.
+\end{itemize}
+
+Modelos para ubicación óptioma del Circuito Intermedio (con el propósito de producir trabajo).
+
+Sólo con $\Delta$T en la fuente caliente: Nuclear Fluido a T constante. Con .......
+
+Idem en la fuente caliente y fria. ..... Brayton: Ciclo de gas
+
+Un análisis de Carnot? de .... deja:
+\begin{itemize}
+    \item El 1° ppio
+    \item El 2° ppio
+    \item La combinación de ambos
+\end{itemize}
+Con la idea de comenzar a aportar a las preguntas anteriores frente a la decisión de invertir o no en el Circuito Intermedio o Circuito Cerrado.
+
+La secuencia o razonamiento es la siguiente, siempre pensando en el posible trabajo que el circuito no produce:
+
+Del primer principio, para CI/CC con solo una fuente caliente y una fría (más una bomba y pérdidas), operando entre $T_H$ y $T_L$, y entre $T_{HC}$ y $T_{LC}$.
+\begin{equation}
+\eta_1=\frac{\dot{W}_u}{Q_{H'}}=Q_H-Q_P-Q_B 
+\end{equation}
+Luego,
+\begin{equation}
+\dot{W}_{uM}=Q_{H'}\left(1-\frac{T_L}{T_H}\right)
+\end{equation}
+De la combinación del Primer y el Segundo Principio.
+\begin{equation}
+\dot{W}_{uM}=Q_{H'}\left(\eta_c\right)
+\end{equation}
+$\eta_c$ de Carnot o rendimiento del calor.
+
+Mientras que visto como Segundo Principio porque en realidad $\dot{W}_u$ no existe:
+\begin{equation}
+    T_L\dot{S}_g = Q_{H'}\left(1-\frac{T_L}{T_H}\right)
+\end{equation}
+Entropía generada o trabajo perdido máximo.
+
+Es aquí, afectando la $\dot{S}_g$, generación de entropía, por la temperatura de la fuente fría, que la misma ....... trabajo, y se comprende claramente su significado.
+
+¿Construyendo? si el hipotético Circuito Intermedio o Circuito Cerrado ... de trabajo ... no reversible. Se puede definir un rendimiento del Segundo Principio $\eta_{II}$:
+\begin{equation}
+    \frac{\dot{W}_u}{\dot{W}_{uM}}=\frac{\dot{W}_u}{Q_{H'}\left(1-\frac{T_L}{T_C}\right)}=\frac{\eta_I}{\eta_c}
+\end{equation}
+\begin{equation}
+    \eta_I=\eta_c\,\eta_{II}
+\end{equation}
+También y para concluir, si el CI/CC opera entre $T_{HC}<T_{H}$ y $T_{LC}>T_{L}$  (ya que de otra manera $\eta_c\xrightarrow{}\infty$), resulta que el trabajo obtenible es de un valor (y aun si el ciclo es reversible)
+\begin{equation}
+    \dot{W}_u'=Q_H\left(1-\frac{T_{LC}}{T_{HC}}\right)<\dot{W}_{uM}
+\end{equation}
+De manera que caben múltiples análisis. Por ejemplo, en el caso del "heat pipe", operando con un fluido que cambia de fase sin sobrecalentar ni subenfriar a $T_{HC}=T_{LC}$ y entre las temperaturas resulta que:
+\begin{equation}
+    \dot{W}_u'=T_L\dot{S}_g=Q_H\left(\frac{1}{T_{LC}}-\frac{1}{T_{HC}}\right)\xrightarrow{}0
+\end{equation}
+Es decir, el ciclo del heat pipe no genera trabajo. Es inevitable la pérdida entre las temperaturas escritas $T_H$ y $T_L$.
+
+Para responder la pregunta "¿Cuánto trabajo útil se pierde al colocar el circuito intermedio?", recordamos los balances del Primer y el Segundo Principio y su combinación:
+
+Definiendo $E=\frac{1}{2}U^2+gz+\hat{u}$ y $h^0=E+\frac{P}{\rho}$ (metalpía). Resulta:
+\begin{equation}
+    \frac{dE}{dt}=\sum_{i}^{n} \dot{Q}_i - \dot{W}_u + \sum_{e}^{} n_i\hat{h}_i^0 - \sum_{s}^{} n_i\hat{h}_i^0 \label{ppioI}
+\end{equation}
+\begin{equation}
+    \frac{dS}{dt}=\sum_{i}^{n} \frac{\dot{Q}_i}{T} + \sum_{e}^{} n_i\hat{S}_i - \sum_{s}^{} n_i\hat{S}_i + \dot{S}_g \label{ppioII}
+\end{equation}
+Reordenando (\ref{ppioII}):
+\begin{equation}
+    \dot{S}_g=\frac{dS}{dt}-\frac{\dot{Q}_i}{T} + \sum_{s}^{} n_i\hat{S}_i - \sum_{e}^{} n_i\hat{S}_i \geqslant 0
+\end{equation}
+Reemplazando $Q_0$ y $T_0$:
+\begin{equation}
+    T_0\dot{S}_g=-\left(\frac{dE}{dt}-T_0\frac{dS}{dt}\right)-\dot{W}-\sum_{i}^{n-1} \left(1-\frac{T_0}{T_i}\right)Q_i+\sum_{e}^{}n_i\left(\hat{h}_i^0-T_0\hat{S}_i\right)-\sum_{s}^{}n_i\left(\hat{h}_i^0-T_0\hat{S}_i\right)
+\end{equation}
+Donde:
+\begin{equation}
+    W_r=\sum_{i}^{n-1} \left(1-\frac{T_0}{T_i}\right)Q_i
+\end{equation}
+Si se resta el trabajo de presión $P_0$, queda $\dot{E}_W=\dot{W}-P_0\frac{dV}{dt}$.
+\begin{equation}
+    \dot{E}_W=-\frac{d}{dt}\left(E+P_0V-T_0S\right)+\sum_{i}^{n-1} \left(1-\frac{T_0}{T_i}\right)Q_i+\sum_{s}^{}n_i\left(\hat{h}_i^0-T_0\hat{S}_i\right)-\sum_{e}^{}n_i\left(\hat{h}_i^0-T_0\hat{S}_i\right)-T_0\dot{S}_g
+\end{equation}
+\section{Circuitos intermedios y trabajo perdido}
+\subsection{Caso 1}
+Caso más simple. Equivale a un ''heat pipe'' con cambio de fase.
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+Las capacidades caloríficas tienden a infinito.
+
+Por el Primer Principio, se transmite $\dot{P}_c$.
+\begin{equation}
+    w_vh_{lv}=w_lC_{pl}\left(t_c-t_f\right)
+\end{equation}
+Donde $t_c=70\celsius$ y $t_f=50\celsius$. Se define $\overline{t}=60\celsius$.
+
+Se plantea el $\dot{S}_g$ abierto, para notar como influyen los $\Delta{T}$.
+\begin{equation}
+    \dot{S}_g=\dot{P}_c\left(\frac{1}{t_c}-\frac{1}{t_v}\right)+\dot{P}_c\left(\frac{1}{t_f}-\frac{1}{t_c}\right)+\dot{P}_c\left(\frac{1}{t_f}-\frac{1}{t_a}\right)+\dot{P}_p\left(\frac{1}{t_a}-\frac{1}{t_v}\right)+\frac{P_b}{t_a}
+\end{equation}
+Donde $P_P$ son pérdidas y $P_b$ ... global
+\begin{equation}
+    \dot{S}_g=\dot{P}_c\left(\frac{1}{t_a}-{1}{t_v}\right)=\frac{\dot{P}_c}{t_a}\left(1-{t_a}{t_v}\right)
+\end{equation}
+\begin{equation}
+    \dot{S}_gt_a=\dot{W}_p=\dot{P}_c\left(1-{t_a}{t_v}\right)^{II}
+\end{equation}
+Como Carnot < ${P_c}^{II}$, este es el rendimiento global $\eta_{II}$.
+
+Si el hipotético ciclo está en el circuito intermedio:
+\begin{equation}
+    \dot{S}_gt_a=P_c\left(1-\frac{t_f}{t_c}\right)^{I}
+\end{equation}
+\begin{equation}
+    \eta_I<\eta_{II}
+\end{equation}
+$\dot{S}_gt_a$ es la generación o posible trabajo perdido por la existencia del circuito.
+
+Las diferencias $\left(t_v-t_c\right)$ y $\left(t_f-t_a\right)$ son imperceptibles, de lo contrario $UA\xrightarrow{}\infty$.
+\subsection{Caso 0 (caso de los libros de Termodinámica)}
+Con $\Delta{t_s}$, pero $UA_i\xrightarrow{}\infty$
+
+\begin{equation*}
+    \eta_I=\eta_{II}
+\end{equation*}
+\begin{equation*}
+    t_v=t_c
+\end{equation*}
+\begin{equation*}
+    t_f=t_a
+\end{equation*}
+\begin{equation}
+    t_a\dot{S}_g=P_c\left(1-\frac{t_a}{tv}\right) \label{a}
+\end{equation}
+Ambos términos de (\ref{a}) de $P_p$ y $P_b$.
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+Existen "....." (Navikov) para .... $\eta$ y $\dot{W}_u$ (Curzon).
+\begin{equation}
+    \dot{W}_u=\eta_c\left(1-\sqrt{\frac{t_a}{t_v}}\right)
+\end{equation}
+\begin{equation}
+    \text{slope?}<P_c\left(1-\frac{t_a}{tv}\right)
+\end{equation}
+Dónde ubicar el ciclo intermedio que flota entre $t_v$ y $t_a$ .... las $UA_1$ y $UA_2$. No se analizará aquí ya que el caso está asociado a un ciclo productivo.
+
+Si $t_f$ y $t_c$ son las temperaturas operativas entre $t_v$ y $t_a$ ... lo replicable arriba. Siempre $\eta_I<\eta_{II}$ pero es una base para el análisis del posible trabajo perdido al colocar el CI (más favorable a este).
+
+\subsection{Casos de CI}
+Potencia de intercambiadores de calor reales (¿leyes de London?).
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+Se hace empleo del concepto de eficiencia que para condensadores o evaporadores se simplifica:
+\begin{equation}
+    \epsilon_I=\frac{t_h-t_c}{t_v-t_c}\left(\frac{C_c}{C_v}\right)
+\end{equation}
+Donde $C_v\xrightarrow{}\infty$ por cambio de fase y $\frac{C_c}{C_v}=1$
+\begin{equation}
+    \dot{m}C_c\left(t_h-t_c\right)-UA_1\frac{\left(t_h-t_c\right)}{ln\left(\frac{t_v-t_c}{t_v-t_h}\right)}
+\end{equation}
+\begin{equation}
+    \dot{m}C_c\left(t_h-t_c\right)=UA_1\frac{\left(t_h-t_c\right)}{ln\left(\frac{t_v-t_c}{t_v-t_h}\right)}
+\end{equation}
+\begin{equation}
+    ln\left(\frac{t_v-t_c}{t_v-t_h}\right)=N_1=\left(\frac{UA}{\dot{m}C_c}\right)_1
+\end{equation}
+De aquí,
+\begin{equation}
+    \frac{t_v-t_h}{t_v-t_c}=e^{-N_1}
+\end{equation}
+\begin{equation}
+    t_f-t_c=\left(t_v-t_c\right)-\left(t_v-t_c\right)e^{-N_1}
+\end{equation}
+\begin{equation}
+    \frac{t_h-t_c}{t_v-t_c}=\epsilon_1=1-e^{-N_1}
+\end{equation}
+Se grafica .... con $C_n/C_v=0$
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+$\dot{m}_v=W_p$
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+[Texto]
+
+\begin{equation}
+    \epsilon_1=\frac{t_h-t_c}{t_h-t_a}\left(\frac{C_c}{C_v}\right)
+\end{equation}
+\begin{equation}
+    \epsilon_1=1-e^{-N_2}
+\end{equation}
+Con ello podemos intercalar entre $t_v$ y $t_a$, un circuito real con $\Delta{ts}$, $U$ y áreas:
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+$\dot{m}_v=W_p$
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+\subsubsection{Primer Principio}
+\begin{equation}
+    P_c=P_c'+P_c''+P_c'''
+\end{equation}
+\begin{equation}
+    P_c=W_v\hat{h}_{lv}=\dot{m}_1C_1\left(t_h-t_c\right)\approx\dot{m}_1C_1\left(t_h'-t_c'\right)
+\end{equation}
+\begin{equation}
+    W_v\hat{h}_{lv}=UA_1\frac{t_h-t_c}{ln\left(\frac{t_v-t_c}{t_v-t_h}\right)}
+\end{equation}
+\begin{equation}
+    W_v\hat{h}_{lv}=UA_2\frac{t_h-t_c}{ln\left(\frac{t_h-t_a}{t_c-t_a}\right)}
+\end{equation}
+\subsection{Generación global de S o Wperdido}
+Sigue ...
+\begin{equation}
+    t_a\dot{S}_g=P_c\left(1-\frac{t_a}{t_v}\right)
+\end{equation}
+la ...
+
+Para separar etapas, si $t_c\approx t_c'$ y $t_h\approx t_h'$
+\begin{equation}
+    \dot{S}_{g1}=W_v\frac{h_{lv}}{t_v}+nCpln\left(\frac{t_h}{t_c}\right)
+\end{equation}
+\begin{equation}
+    \dot{S}_{g2}=W_v\frac{h_{lv}}{t_a}-nCpln\left(\frac{t_h}{t_c}\right)
+\end{equation}
+\begin{equation}
+    \dot{S}_g=W_v\hat{h}_{vl}\left(\frac{1}{t_a}-\frac{1}{t_v}\right)
+\end{equation}
+\begin{equation}
+    t_a\dot{S}_g=W_v\hat{h}_{vl}\left(1-\frac{t_a}{t_v}\right)
+\end{equation}
+Como se ... el caso 1 al caso 0 (con $\Delta{t_s}$) depende de $\epsilon_i$, por ejemplo en la rama de calentamiento.
+\begin{equation}
+    \dot{S}_g=W_v\frac{\hat{h}_{lv}}{t_v}+nCln\left(\frac{t_h}{t_c}\right)
+\end{equation}
+Luego,
+\begin{equation}
+    nCln\left(\frac{t_h}{t_c}\right)=nCln\left(\frac{t_a\left(1-\epsilon\right)}{t_h-\epsilon t_v}\right)
+\end{equation}
+Si $\epsilon\xrightarrow{}1$, $t_h\xrightarrow{}t_v$, y queda una relación $0/0$. Derivando respecto de $\epsilon$:
+\begin{equation}
+    \frac{-t_h}{-t_v}\xrightarrow{}1
+\end{equation}
+Luego, $ln(1)=0$ y $\dot{S}_g$ es mínimo, pero $UA\xrightarrow{}1$, ya que si $t_f\xrightarrow{}t_v$, no existe diferencia de temperatura entre las corrientes.
+
+\section{Ciclo de Brayton Ideal}
+$Cp$ constante, $P_H$, $P_C$, $T_H$ y $T_L$ fijas. Proceso Endoreversible. $h_{lv}$? asociados con $Q_{Hj}$ y $Q_L$.
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+Del balance de energía:
+\begin{equation}
+    \dot{S}_g=-\frac{Q_H}{T_H}+\frac{Q_L}{T_L}\quad\text{(Ciclo Cerrado)}
+\end{equation}
+\begin{align}
+    &Q_H=nCp\left(T_L-T_1\right) & Q_L=nCp\left(T_3-T_4\right)
+\end{align}
+También se puede calcular como $A_H$ y $A_L$. Recordando que $dS=\frac{Cp}{T}dT-\frac{R}{P}dP$:
+\begin{equation}
+    \dot{S}_{gH}=nCp\left(ln\left.\frac{T_L}{T_1}\right.-\frac{T_L-T_1}{T_H}\right)
+\end{equation}
+\begin{equation}
+    \dot{S}_{gL}=nCp\left(ln\left.\frac{T_4}{T_3}\right.-\frac{T_4-T_3}{T_2}\right)
+\end{equation}
+Relación entre temperaturas:
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+\begin{equation}
+    nCp\left(T_2-T_4\right)=\left(UA\right)_H\frac{\left(T_H-T_2\right)-\left(T_H-T_1\right)}{ln\left.\frac{T_H-T_2}{T_H-T_1}\right.}
+\end{equation}
+\begin{equation}
+    ln\left.\frac{T_H-T_1}{T_H-T_2}\right.=\frac{UA}{nCp}
+\end{equation}
+\begin{equation}
+    \frac{T_H-T_1}{T_H-T_2}=e^{N_H}
+\end{equation}
+Con $N_H=\frac{UA_H}{nCp}$.
+En el cooler:
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+\begin{equation}
+    nCp\left(T_3-T_4\right)=UA_L\frac{\left(T_4-T_L\right)-\left(T_3-T_L\right)}{ln\left.\frac{T_4-T_L}{T_3-T_L}\right.}
+\end{equation}
+\begin{equation}
+    nCp\left(T_3-T_4\right)=UA_L\frac{\left(T_4-T_L\right)-\left(T_3-T_L\right)}{ln\left.\frac{T_4-T_L}{T_3-T_L}\right.}
+\end{equation}
+\begin{equation}
+    \frac{T_3-T_L}{T_4-T_L}=e^{N_L}
+\end{equation}
+\begin{equation}
+    N_L=\frac{UA_L}{nCp}
+\end{equation}
+Son datos $T_H$, $T_L$, $P_H$, $P_L$, $Cp$, $n$, $UA$ global.
+
+Como $P_1{v_1}^{k}=P_2{v_2}^{k}$ y $v=\left(\frac{RT}{P}\right)$:
+\begin{equation}
+    P_1\left(\frac{RT_1}{P_1}\right)^k=P_2\left(\frac{RT_2}{P_2}\right)^k
+\end{equation}
+\begin{equation}
+    P^{1-k}T^k=\text{constante}
+\end{equation}
+Es decir:
+\begin{equation}
+    \frac{T_2}{T_3}=\left(\frac{P_3^{\left(1-k\right)/k}}{P_2^{\left(1-k\right)/k}}\right)=\frac{T_1}{T_4}
+\end{equation}
+\begin{equation}
+    \frac{T_1}{T_4}=\frac{T_2}{T_3}=a=\left(\frac{P_H}{P_L}\right)^{\frac{k-1}{k}}
+\end{equation}
+Incógnitas: $T_1$, $T_2$, $T_3$, $T_4$, $\dot{S}_g$, $UA_H$ ó $UA_L$.
+Se fija:
+\begin{align}
+    &UA=UA_H+UA_L &\text{ó}&& N_H+N_L=\frac{UA}{nCp} 
+\end{align}
+\begin{equation}
+    \dot{S}_g\text{(global)}=-\frac{Q_H}{T_H}+\frac{Q_L}{T_L}
+\end{equation}
+\begin{equation}
+    \frac{\dot{S}_g}{nCp}=\frac{T_3-T_4}{T_L}-\frac{T_L-T_1}{T_H}
+\end{equation}
+Se busca eliminar $T_1$, $T_2$, $T_3$ y $T_4$. ¿?
+\color{blue}
+\begin{equation}
+    \frac{\dot{S}_g}{UA}=\left[\left(\frac{T_H}{aT_L}\right)^{1/2}-\left(\frac{T_H}{aT_L}\right)^{1/2}\right]\cdot\frac{\left(e^{N_H}-1\right)-\left(e^{N_L}-1\right)}{e^{N_H}e^{N_L}-1}
+\end{equation}
+\color{black}
+Si $a\uparrow$ $\left(a=\left(\frac{P_H}{P_L}\right)^{\left(k-1\right)/k}\uparrow,\quad\frac{T_1}{T_4}=\frac{T_2}{T_3}\uparrow\right)$, $\dot{S}_g \downarrow$ en forma continua
+\begin{itemize}
+    \item No existe optimización de las temperaturas intermedias? (Ver debajo)
+\end{itemize}
+Como $N_H+N_L=\frac{U_H}{nCp}=\text{cte}$, existe sólo 1 grado de libertad.
+
+Se deriva $\frac{\partial \dot{S}_g}{\partial N_H}=0\Longrightarrow UA_{H\theta}=UA_{L\theta}=\frac{1}{2}U_H$. Igual aplicarla en Planta Térmica.
+
+Entonces si $M=\frac{nCp}{UA}$:
+\color{blue}
+\begin{equation}
+    \frac{\dot{S}_g}{UA}=\left[\left(\frac{T_H}{aT_L}\right)^{1/2}-\left(\frac{T_H}{aT_L}\right)^{1/2}\right]\cdot M T_H\left(\frac{1}{4M}\right)
+\end{equation}
+\color{black}
+\begin{equation}
+\text{Si:}\quad
+    \begin{cases}
+      n>0 \\
+      T_H>1 \\
+      UA\uparrow/n\downarrow
+\end{cases}
+\end{equation}
+Si $M\xrightarrow{} 0\Longrightarrow T_L=T_H$  y  $T_4=T_L$.
+
+\subsubsection{Temperaturas óptimas}
+Como $N_H=N_L=\frac{1}{2}\frac{UA}{nCp}$ Número de unidades de transferencia.
+\begin{equation}
+    \frac{T_H-T_1}{T_H-T_2}=e^{N/2}
+\end{equation}
+\begin{equation}
+    \frac{T_3-T_L}{T_4-T_L}=e^{N/2}
+\end{equation}
+\begin{align}
+    &\frac{T_1}{T_4}=\frac{T_L}{T_3}=a &\text{ó} && \frac{T_1}{T_L}=\frac{T_4}{T_3}=a\frac{T_4}{T_L}
+\end{align}
+\begin{equation}
+    \frac{T_H-T_1}{T_H-T_2}=\frac{T_3-T_L}{T_4-T_L}=\frac{1-T_L/T_3}{T_1/T_2-T_L}
+\end{equation}
+Dados $\frac{T_1}{T_4}=\frac{T_2}{T_3}=a$:
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+Sale:
+\begin{equation}
+    \left(T_1+T_2\right)_{\theta}=T_H+aT_L
+\end{equation}
+\begin{equation}
+    \left(T_3+T_4\right)_{\theta}=\frac{1}{a}T_H+T_L
+\end{equation}
+Función del ciclo entre $T_H$ y $T_L$, dado $\frac{P_H}{P_L}$ (semejantes a $\tau_c=\sqrt{\tau}$ en el térmico).
+
+Entonces:
+\begin{equation}
+    \eta_I=\frac{W}{Q_H}=1-\left(\frac{P_L}{P_H}\right)^{\left(k-1\right)/k}<1-\frac{T_L}{T_H}\quad
+\end{equation}
+Independientemente de la aislación de UA.
+
+Pensar efectos ''reales'' en el ..., etc. Si $M^0=\frac{UA}{nCp}T$, el ciclo se ''...'' y $\dot{S}_g$ disminuye.
+\subsection{Bejan Capítulo 11 (pg. 610)}
+Pmáx o Smin? PM/EGM?
+\subsubsection{Modelos}
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+Ciclo reversible, $T_L=T_{LC}$, $Q_H$, $Q_L$ fijos y $T_H$ fija. $\dot{S}_g=0$ (ciclo reversible).
+$GL$ sólo $T_{HC}$?
+
+Mayor $P_G$ ó $W$.
+\begin{equation}
+    \dot{W}=\dot{Q}_H-\dot{Q}_L
+\end{equation}
+\begin{equation}
+    \dot{W}=\left(1-\frac{T_L}{T_{HC}}\dot{Q_H}\right)
+\end{equation}
+\begin{equation}
+    \eta_I=\frac{\dot{W}}{\dot{Q}_H}=1-\frac{T_L}{T_{HC}}
+\end{equation}
+\begin{equation}
+    \eta_c=1-\frac{T_L}{T_{H}}
+\end{equation}
+\begin{equation}
+    \eta_{II}=\frac{\dot{W}}{\dot{W}_n}
+\end{equation}
+\begin{equation}
+    \dot{Q}_H=k\left(T_H-T_{HC}\right)
+\end{equation}
+\begin{equation}
+       \dot{W}=k\left(T_H-T_{HC}\right)\left(1-\frac{T_L}{T_{HC}}\right)=kT_H-k\frac{T_L T_H}{T_{HC}}-kT_{HC}+kT_L
+\end{equation}
+\begin{equation}
+    \frac{\partial \dot{W}}{\partial T_{HC}}=\frac{kT_LT_H}{T_{HC}^2}-k=0
+\end{equation}
+Despejando $T_{HC}$:
+\begin{equation}
+    T_{HC}=\sqrt{T_LT_H}
+\end{equation}
+\begin{equation}
+    \eta=1-\frac{T_L}{\sqrt{T_LT_H}}=1-\left(\frac{T_L}{T_H}\right)^{1/2}
+\end{equation}
+\begin{equation}
+    \dot{Q}_H=k\left(T_H-T_{HC}\right)
+\end{equation}
+\begin{equation}
+    \dot{Q}_L=\dot{Q}_L-\dot{W}=k\left(T_H-T_{HC}\right)-k\left(T_H-T_{HC}\right)\left(1-\frac{T_L}{T_{HC}}\right)
+\end{equation}
+\subsection{Navikov con irreversibilidad}
+\subsubsection{Bejan AET. Ej 8.21 pg. 112}
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+\begin{equation}
+    \dot{W}=\dot{Q}_H-\dot{Q_L}'\left(1+i\right)
+\end{equation}
+Si el ciclo es reversible:
+\begin{equation}
+    \dot{S}_g=-\frac{\dot{Q}_H}{T_{HC}}+\frac{\dot{Q_L}}{T_L}=0
+\end{equation}
+\begin{equation}
+    \eta=\frac{\dot{W}}{\dot{Q}_H}=1-\frac{Q_L'}{Q_H}\left(1+i\right)
+\end{equation}
+\begin{equation}
+    Q_H=k\left(T_H-T_{HC}\right)
+\end{equation}
+En
+\begin{equation}
+    \dot{W}=Q_H-\frac{Q_HT_L}{T_{HC}}\left(1+i\right)
+\end{equation}
+\begin{equation}
+    \dot{W}=Q_H\left(1-\frac{T_L}{T_{HC}}\left(1+i\right)\right)=k\left(T_H-T_{HC}\right)\left(1-\frac{T_L}{T_{HC}}\left(1+i\right)\right)
+\end{equation}
+\begin{equation}
+    \dot{W}=kT_H-\frac{kT_HT_L}{T_{HC}}\left(1+i\right)-kT_+kT_L\left(1+i\right)
+\end{equation}
+Son datos $\dot{Q}_H$, $T_H$, $T_L$. Se busca obtener $\dot{Q}_L$, $\dot{W}$, $T_{HC}$, $\eta$. El grado de libertad es $T_{HC}$
+\begin{equation}
+    \frac{\partial \dot{W}}{\partial T_{HC}}=\frac{kT_HT_L}{T_{HC}^2}\left(1+i\right)-k=0
+\end{equation}
+\begin{equation}
+    T_{HC}=\sqrt{\left(1+i\right)}\sqrt{\left(T_HT_L\right)}
+\end{equation}
+\begin{equation}
+    \dot{Q}_H=k\left(T_H-\sqrt{1+i}\sqrt{T_HT_L}\right)
+\end{equation}
+\begin{equation}
+    \dot{Q}_L=\frac{\dot{Q}_HT_L}{T_{HC}}\left(1+i\right)
+\end{equation}
+\begin{equation}
+    \eta=1-\sqrt{1+i}\sqrt{\frac{T_L}{T_H}}
+\end{equation}
+\subsection{Bejan AET (621) y Paper Hamt 11-1988 Curzo}
+\subsubsection{Modelo de C y A: Tiene 2 ... pero con $Q_i$}
+$\dot{S}_g=0$
+\begin{figure}[H]
+    \centering
+    \includegraphics{example-image}
+    \caption{Caption}
+\end{figure}
+El ciclo es reversible:
+\begin{equation}
+    
+\end{equation}
+
+
+\end{document}
